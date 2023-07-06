@@ -1,38 +1,53 @@
-.App {
-  text-align: center;
+.myNavBar {
+  padding-right: 314px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.liNavbar {
+  margin-right: 22px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.myContainer {
+  padding-right: 80px;
+  text-align: justify;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.servicesCard {
+  width: 450px;
+  height: 350px;
+  margin-right: 15px;
+  float: left;
 }
 
-.App-link {
-  color: #61dafb;
+.formBorder {
+  width: 400px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.educationBorder {
+  border: 1px solid;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+
+.errMsg {
+  color: red
+}
+
+Formik Field .inputField {
+  border-color: red;
+}
+
+.signupForm {
+ 
+
+  width: 800px;
+  margin-left: 150px;
+  margin-bottom: 70px;
+  padding-left: 50px;
+  padding-bottom: 15px;
+
+}
+
+.formField {
+  width: 400px;
+
 }
