@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { userLogout } from "../action/userAction";
@@ -6,9 +6,21 @@ import { userLogout } from "../action/userAction";
 const Dashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const userData = useSelector((state) => state.user.myUser);
+  const token = localStorage.getItem("token") || null;
+  // alert(localStorage.getItem("token"));
   debugger;
+  if (token === null) {
+    navigate("/login");
+  }
+  useEffect(() => {
+    if (token === null) {
+      navigate("/login");
+    } else {
+      alert("else");
+    }
+  });
+  const userData = useSelector((state) => state.user.myUser);
+  // debugger;
   const handleLogout = () => {
     dispatch(userLogout(navigate));
 
@@ -27,7 +39,7 @@ const Dashboard = () => {
           </tr>
         </thead>
         <tbody>
-          {userData != '' ? (
+          {userData != "" ? (
             <tr class="table-active">
               <td>
                 {console.log("userData")}

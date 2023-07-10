@@ -6,15 +6,20 @@ import Pin from "./components/Pin";
 import Login from "./components/Login";
 import "./App.css";
 import Dashboard from "./components/Dashboard";
+import { useSelector } from "react-redux";
 
 function App() {
-  const token = localStorage.getItem("token");
+  // const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token") || null;
   const userData = JSON.parse(localStorage.getItem("user"));
   const userStatus = userData != null ? userData.user_status : null;
+  const myUserData = useSelector((state) => state.user.myUser);
+  // const statusCode = myUserData[0].status ? myUserData[0].status : 300;
+  const statusCode = myUserData[0]?.status || 300;
   const navigate = useNavigate();
   debugger;
   useEffect(() => {
-    if (token) {
+    if (token != null || token != undefined) {
       navigate("/dashboard");
     }
   }, [navigate, token]);
@@ -22,15 +27,11 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Signup />} />
-      {/* {userStatus != null || userStatus != undefined ? (
-        <Route path="/dashboard" element={<Dashboard />} />
-      ) : (
-        <Route path="/pin" element={<Pin />} />
-      )} */}
 
       <Route path="/pin" element={<Pin />} />
       <Route path="/dashboard" element={<Dashboard />} />
-      {!token && <Route path="/login" element={<Login />} />}
+      {/* {!token && <Route path="/login" element={<Login />} />} */}
+      <Route path="/login" element={<Login />} />
     </Routes>
   );
 }

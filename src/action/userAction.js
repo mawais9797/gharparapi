@@ -120,9 +120,58 @@ export const userLogout = (navigate) => async (dispatch) => {
   debugger;
   const user = JSON.parse(localStorage.getItem("user"));
   const token = user.auth_token;
-  localStorage.clear();
-  navigate("/login");
+
+  // const data = {
+  //   Headers: {
+  //     "AUTH-TOKEN": token,
+  //     "Content-Type": "application/json",
+  //   },
+  // };
+
+  const config = {
+    headers: {
+      "AUTH-TOKEN": token,
+      "Content-Type": "application/json",
+    },
+  };
+  const response = await axios.post(
+    "http://demoapi.gharpar.co/api/v8/user_sessions/logout.json",
+    {},
+    config
+  );
+  debugger;
+  if (response.status === 200) {
+    localStorage.clear();
+    navigate("/login");
+  }
 };
+
+// export const signOutUser = (authToken, naviagte) => {
+//   return (dispatch) => {
+//     const config = {
+//       headers: {
+//         "AUTH-TOKEN": authToken,
+//         "Content-Type": "application/json",
+//       },
+//     };
+
+//     axios
+//       .post(
+//         "http://demoapi.gharpar.co/api/v8/user_sessions/logout.json",
+//         {},
+//         config
+//       )
+//       .then((response) => {
+//         // if (response.status === 200) {
+//         dispatch({ type: "SIGNOUT_SUCCESS", payload: response.data });
+//         naviagte("/signin");
+//         // } // Invoke the callback function
+//       })
+//       .catch((error) => {
+//         dispatch({ type: "SIGNOUT_ERROR", payload: error.message });
+//       });
+//   };
+// };
 
 // export const login = (email, password) => async (dispatch) => {
 //   //   debugger;

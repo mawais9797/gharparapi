@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./Header";
 // import React from "react";
 
 import { Formik, Form, Field, ErrorMessage, validateYupSchema } from "formik";
 import * as Yup from "yup";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useNavigate } from "react-router-dom";
 import { pinUser } from "../action/userAction";
@@ -13,7 +13,14 @@ import { pinUser } from "../action/userAction";
 const Pin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const myUserData = useSelector((state) => state.user.myUser);
+  // const statusCode = myUserData[0].status ? myUserData[0].status : 300;
+  const statusCode = myUserData[0]?.status || 300;
+  useEffect(() => {
+    if (statusCode != 200) {
+      navigate("/login");
+    }
+  }, [statusCode, navigate]);
   const initialValues = {
     phone_pin: "",
   };
